@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Learn HTML</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+  <style>
+    /* Basic Styling */
+    body {
+      display: flex;
+      font-family: 'Arial', sans-serif;
+      margin: 0;
+      flex-direction: column;
+    }
+
+    /* Hero Section */
+    .hero-section {
+      background-color: #c24040;
+      color: white;
+      text-align: center;
+      padding: 100px 20px;
+      position: relative;
+    }
+
+    .hero-section h1 {
+      font-size: 3rem;
+      margin-bottom: 20px;
+    }
+
+    .hero-section p {
+      font-size: 1.2rem;
+      margin-bottom: 30px;
+    }
+
+    /* Side Navigation */
+    .sidenav {
+      height: 100vh;
+      width: 250px;
+      background-color: #c24040;
+      color: white;
+      position: fixed;
+      top: 0;
+      padding: 20px;
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+    }
+
+    .sidenav a {
+      color: #fff;
+      text-decoration: none;
+      padding: 10px 15px;
+      border-radius: 5px;
+      transition: 0.3s;
+    }
+
+    .sidenav a:hover {
+      background-color: #f1c40f;
+      color: #000;
+    }
+
+    /* Main Content */
+    .main-content {
+      margin-left: 260px; /* Space for side navigation */
+      padding: 20px;
+      width: 100%;
+    }
+
+    h1 {
+      color: #c24040;
+    }
+
+    /* Smooth Scrolling */
+    html {
+      scroll-behavior: smooth;
+    }
+
+    /* Active Link Styling */
+    .sidenav a.active {
+      background-color: #f1c40f;
+      color: #000;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Hero Section -->
+  <div class="hero-section">
+    <h1>Learn HTML</h1>
+    <p>Start your web development journey with HTML. Learn everything from basics to advanced topics.</p>
+  </div>
+
+  <!-- Side Navigation -->
+  <div class="sidenav">
+    <h3>HTML Topics</h3>
+    <!-- Links that scroll to different sections -->
+    <a href="#introduction">Introduction</a>
+    <a href="#syntax">HTML Syntax</a>
+    <a href="#forms">HTML Forms</a>
+    <a href="#tables">HTML Tables</a>
+    <a href="#advanced">Advanced Topics</a>
+  </div>
+
+  <!-- Main Content -->
+  <div class="main-content">
+    <section id="introduction">
+      <h2>Introduction</h2>
+      <p>HTML (Hypertext Markup Language) is the standard language used to create web pages. It defines the structure of web pages using a series of elements.</p>
+    </section>
+    <section id="syntax">
+      <h2>HTML Syntax</h2>
+      <p>HTML uses tags to define elements like headings, paragraphs, and links. A basic HTML document consists of a `<html>`, `<head>`, and `<body>` tag.</p>
+    </section>
+    <section id="forms">
+      <h2>HTML Forms</h2>
+      <p>Forms are used to collect user input. You can use input elements such as text boxes, radio buttons, and drop-down menus in HTML forms.</p>
+    </section>
+    <section id="tables">
+      <h2>HTML Tables</h2>
+      <p>Tables allow you to organize data in rows and columns using the `<table>`, `<tr>`, `<td>`, and `<th>` tags.</p>
+    </section>
+    <section id="advanced">
+      <h2>Advanced Topics</h2>
+      <p>Advanced HTML topics include semantic tags, multimedia embedding, and accessibility features like ARIA attributes.</p>
+    </section>
+  </div>
+
+  <script>
+    // Highlight the active link based on scroll position
+    window.addEventListener('scroll', function() {
+      const sections = document.querySelectorAll('section');
+      const links = document.querySelectorAll('.sidenav a');
+      
+      let currentSection = '';
+
+      sections.forEach(section => {
+        const sectionTop = section.offsetTop;
+        const sectionHeight = section.clientHeight;
+        if (window.scrollY >= sectionTop - sectionHeight / 3) {
+          currentSection = section.getAttribute('id');
+        }
+      });
+
+      links.forEach(link => {
+        link.classList.remove('active');
+        if (link.getAttribute('href').includes(currentSection)) {
+          link.classList.add('active');
+        }
+      });
+    });
+  </script>
+
+</body>
+</html>

@@ -1,0 +1,320 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Learn to Code</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+  <style>
+    body {
+      background-color: #1e1e30;
+      color: #fff;
+      font-family: 'Arial', sans-serif;
+      margin: 0;
+      padding: 0;
+    }
+
+    /* Top Navigation Bar */
+    .navbar {
+      background-color: #c24040;
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      z-index: 1000;
+      padding: 0;
+    }
+    .navbar .container {
+      display: flex;
+      justify-content: space-between;
+      padding: 0 15px;
+    }
+    .navbar-brand {
+      color: #fff;
+      font-size: 1.2rem;
+    }
+    .navbar-nav .nav-link {
+      color: #fff;
+      font-size: 0.9rem;
+    }
+    .navbar-nav .nav-link.active {
+      background-color: #141313;
+      color: white;
+      font-weight: bold;
+      border-radius: 5px;
+    }
+
+    /* Sidebar style */
+    #sideNav {
+      position: fixed;
+      left: -250px; /* Initially hidden off-screen */
+      top: 10px; /* Start below the top navigation */
+      width: 250px;
+      height: calc(100% - 10px); /* Full height minus navbar */
+      background-color: #2e2e40;
+      padding: 20px;
+      overflow-y: auto;
+      box-shadow: 2px 0 5px rgba(0, 0, 0, 0.2);
+      transition: left 0.3s ease;
+      z-index: 900;
+    }
+    #sideNav.active {
+      left: 0; /* Show sidebar */
+    }
+    #sideNav h4 {
+      color: #c24040;
+      margin-bottom: 15px;
+    }
+    #sideNav ul {
+      list-style: none;
+      padding: 0;
+    }
+    #sideNav ul li {
+      margin-bottom: 10px;
+    }
+    #sideNav ul li a {
+      color: #fff;
+      text-decoration: none;
+    }
+    #sideNav ul li a.active {
+      background-color: #020202;
+      color:white;
+      font-weight: bold;
+      border-radius: 5px;
+    }
+    #sideNav button {
+      background: none;
+      border: none;
+      color: white;
+      font-size: 1.5rem;
+      margin-bottom: 10px;
+      cursor: pointer;
+    }
+
+    /* Main content */
+    .main-content {
+      margin-top: 100px; /* Add top margin to push content below navbar */
+    }
+
+    /* Hero Section */
+    .hero-section {
+      text-align: center;
+      padding: 80px 20px;
+    }
+    .hero-section h1 {
+      font-size: 3rem;
+      font-weight: bold;
+    }
+    .hero-section p {
+      font-size: 1.2rem;
+      color: #c24040;
+      margin: 10px 0 30px;
+    }
+
+    /* Responsive Image */
+    .astronaut img {
+      max-width: 100%;
+      height: auto;
+    }
+
+    /* Search Bar */
+    .search-bar {
+      max-width: 600px;
+      margin: 0 auto;
+      display: flex;
+    }
+    .search-bar input {
+      flex: 1; /* Ensure input takes full width minus button */
+      padding: 10px 20px;
+      border: none;
+      border-radius: 50px 0 0 50px;
+      outline: none;
+      font-size: 1rem;
+    }
+    .search-bar button {
+      padding: 10px 20px;
+      border: none;
+      background-color: #c24040;
+      color: #fff;
+      font-weight: bold;
+      border-radius: 0 50px 50px 0;
+      cursor: pointer;
+      font-size: 1rem;
+    }
+    .search-bar button:hover {
+      background-color: #218838;
+    }
+
+    iframe {
+      width: 100%;
+      height:10vh; /* Responsive height */
+      border: none;
+    }
+
+    /* Responsive Sidebar */
+    @media (max-width: 768px) {
+      #sideNav {
+        width: 100%;
+        left: -100%; /* Fully hide sidebar */
+      }
+    }
+  </style>
+</head>
+<body>
+  <!-- Sidebar -->
+  <div id="sideNav">
+    <button onclick="toggleSidebar()">&times;</button>
+    <h4>Topics</h4>
+    <ul id="topicsList">
+      <li>Select a language to see topics.</li>
+    </ul>
+  </div>
+
+  <!-- Main Content -->
+  <div class="main-content">
+    <!-- Top Navigation -->
+    <nav class="navbar navbar-expand-lg">
+      <div class="container">
+        <a class="navbar-brand" href="#">BEYCAN </a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNav">
+          <ul class="navbar-nav ms-auto">
+            <li class="nav-item"><a class="nav-link" href="#" onclick="showTopics('python', this)">Python</a></li>
+            <li class="nav-item"><a class="nav-link" href="#" onclick="showTopics('html', this)">HTML</a></li>
+            <li class="nav-item"><a class="nav-link" href="#" onclick="showTopics('java', this)">Java</a></li>
+            <li class="nav-item"><a class="nav-link" href="#" onclick="showTopics('c', this)">C</a></li>
+            <li class="nav-item"><a class="nav-link" href="#" onclick="showTopics('cpp', this)">C++</a></li>
+            <li class="nav-item"><a class="nav-link" href="#" onclick="showTopics('ruby', this)">Ruby</a></li>
+            <li class="nav-item"><a class="nav-link" href="#" onclick="showTopics('php', this)">PHP</a></li>
+          </ul>
+        </div>
+      </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <div class="hero-section">
+      <h1>Learn to Code</h1>
+      <p>With the world's largest web developer site.</p>
+      <div class="search-bar">
+        <input type="text" placeholder="Search our tutorials, e.g., Python">
+        <button onclick="search()">Search</button>
+      </div>
+      <div class="astronaut">
+        <img src="astronaut.png" alt="Astronaut">
+      </div>
+    </div>
+
+    <!-- Content iframe -->
+    <div>
+      <iframe id="contentFrame" src="" frameborder="0"></iframe>
+    </div>
+  </div>
+
+  <script>
+    const topics = {
+      python: [
+        { name: 'INTRODUCTION', link: 'python/intro.html' },
+        { name: 'SYNTAX', link: 'python/syntax.html' },
+        { name: 'COMMENTS', link: 'python/comments.html' },
+        { name: 'VARIABLES', link: 'python/variables.html' },
+        { name: 'DATATYPES', link: 'python/datatypes.html' },
+        { name: 'LIST', link: 'python/list.html' },
+        { name: 'TUPLE', link: 'python/tuple.html' },
+        { name: 'SET', link: 'python/set.html' },
+        { name: 'DICTIONARY', link: 'python/tuple.html' },
+        { name: 'OPERATORS', link: 'python/set.html' },
+        { name: 'CONDITIONAL STATEMENTS', link: 'python/tuple.html' },
+        { name: 'LOOPING', link: 'python/set.html' },
+        { name: 'CLASSES AND OBJECTS', link: 'python/tuple.html' },
+        { name: 'INHERITANCE', link: 'python/set.html' },
+        { name: 'POLYMORPHISM', link: 'python/tuple.html' },
+        { name: 'MODULES', link: 'python/set.html' },
+        { name: 'EXCEPTION', link: 'python/tuple.html' },
+        { name: 'FILE HANDLING', link: 'python/set.html' },
+        { name: 'NUMPY', link: 'python/tuple.html' },
+        { name: 'MATPLOTLIB', link: 'python/set.html' }
+        
+      ],
+      javascript: [
+        { name: 'Variables', link: 'javascript/variables.html' },
+        { name: 'Loops', link: 'javascript/loops.html' }
+      ],
+      java: [
+        { name: 'Variables', link: 'java/variables.html' },
+        { name: 'Loops', link: 'java/loops.html' }
+      ],
+      c: [
+        { name: 'INTRODUCTION', link: 'c/variables.html' },
+        { name: 'SYNTAX', link: 'c/loops.html' },
+        { name: 'COMMENTS', link: 'c/variables.html' },
+        { name: 'VARIABLES', link: 'c/loops.html' },
+        { name: 'DATATYPES', link: 'c/variables.html' },
+        { name: 'ESCAPE SEQUENCE', link: 'c/loops.html' },
+        { name: 'OPERATORS', link: 'c/variables.html' },
+        { name: 'CONDITIONAL STATEMENTS', link: 'c/loops.html' },
+        { name: 'LOOPING', link: 'c/variables.html' },
+        { name: 'ARRAYS', link: 'c/loops.html' },
+        { name: 'STRINGS', link: 'c/variables.html' },
+        { name: 'MATH FUNCTIONS', link: 'c/loops.html' },
+        { name: 'FUNCTION', link: 'c/variables.html' },
+        { name: 'STRUCTURES', link: 'c/loops.html' },
+        { name: 'FILE HANDLING', link: 'c/loops.html' }
+      ],
+      cpp: [
+        { name: 'Variables', link: 'cpp/variables.html' },
+        { name: 'Loops', link: 'cpp/loops.html' }
+      ],
+      ruby: [
+        { name: 'Variables', link: 'ruby/variables.html' },
+        { name: 'Loops', link: 'ruby/loops.html' }
+      ],
+      php: [
+        { name: 'Variables', link: 'php/variables.html' },
+        { name: 'Loops', link: 'php/loops.html' }
+      ]
+    };
+
+    function showTopics(subject, clickedLink) {
+      document.querySelectorAll('.navbar-nav .nav-link').forEach(link => link.classList.remove('active'));
+      clickedLink.classList.add('active');
+
+      const sideNav = document.getElementById('sideNav');
+      const topicsList = document.getElementById('topicsList');
+      topicsList.innerHTML = '';
+
+      if (topics[subject]) {
+        topics[subject].forEach(topic => {
+          const li = document.createElement('li');
+          const a = document.createElement('a');
+          a.href = '#';
+          a.textContent = topic.name;
+          a.onclick = () => loadContent(topic.link, a);
+          li.appendChild(a);
+          topicsList.appendChild(li);
+        });
+      }
+      toggleSidebar();
+    }
+
+    function loadContent(link, clickedTopic) {
+      document.querySelectorAll('#sideNav ul li a').forEach(link => link.classList.remove('active'));
+      clickedTopic.classList.add('active');
+      document.getElementById('contentFrame').src = link;
+    }
+
+    function search() {
+      const query = document.querySelector('.search-bar input').value;
+      alert(`Searching for: ${query}`);
+    }
+
+    function toggleSidebar() {
+      const sideNav = document.getElementById('sideNav');
+      sideNav.classList.toggle('active');
+    }
+  </script>
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>
